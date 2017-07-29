@@ -9772,13 +9772,11 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            fetch('https://crossorigin.me/https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en').then(function (resp) {
+            fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en').then(function (resp) {
                 console.log(resp);
             }).catch(function (err) {
                 consol.log(err);
             });
-
-            var myRequest = "http://api.forismatic.com/";
 
             //   fetch('').then(resp => {
             //   if(resp.ok) {
