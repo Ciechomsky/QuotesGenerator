@@ -4,39 +4,64 @@ import ReactDOM from 'react-dom';
 require('../scss/main.scss')
 
 class App extends React.Component {
+    constructor() {
+        super()
 
+        this.state = {
+            quote: "",
+            author: "",
+            error: "",
+            loading: true
+        }
+    }
 
-
-    render () {
-        // fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then( resp => {
-        //     resp.text().then(value => {
-        //         console.log(value);
-        //     });
-        // }).catch(err => {
-        //     consol.log(err);
-        // });
-
-                fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en', {
-                    mode: 'no-cros'
-                }).then( resp => {
+    componentDidMount() {
+        fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then( resp => {
             resp.text().then(value => {
-                console.log(value);
+                let endingOfQoute = value.indexOf('"',10);
+                let endingOfAuthor = value.indexOf('"', endingOfQoute + 12);
+
+                this.setState({
+                    quote: value.substring(10, endingOfQoute),
+                    author: value.substring(endingOfQoute + 12, endingOfAuthor),
+                    loading: false
+                });  
+                console.log(this.state.loading)          
             });
         }).catch(err => {
-            consol.log(err);
-        });
+            this.setState({
+                error: err
+            });
+        }); 
+    }
 
-    //   fetch('').then(resp => {
-    //   if(resp.ok) {
-    //     return resp.json();
-    //   } else {
-    //     console.log('Błąd');
-    //   }
-    // }).catch(error => {
-    //   console.log('Problem');
-    // });
+    clickButton = () => {
+        fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then( resp => {
+            resp.text().then(value => {
+                let endingOfQoute = value.indexOf('"',10);
+                let endingOfAuthor = value.indexOf('"', endingOfQoute + 12);
 
-        return <h1> test </h1>
+                this.setState({
+                    quote: value.substring(10, endingOfQoute),
+                    author: value.substring(endingOfQoute + 12, endingOfAuthor),
+                    loading: false
+                });  
+                console.log(this.state.loading)          
+            });
+        }).catch(err => {
+            this.setState({
+                error: err
+            });
+        }); 
+    }
+
+    render () {
+        return <div className = "app">
+                <h1 className = "header blockMouse"> Quotes Generator </h1>
+                <h2 className = "quote"> Qoutes: {this.state.quote} </h2>
+                <h3 className = "author"> Author: {this.state.author} </h3>
+                <div className = "button blockMouse" onClick = {this.clickButton}> Generate </div>
+            </div>
     }
 }
 

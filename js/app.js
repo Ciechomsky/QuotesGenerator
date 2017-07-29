@@ -9766,44 +9766,90 @@ var App = function (_React$Component) {
     function App() {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+        _this.clickButton = function () {
+            fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then(function (resp) {
+                resp.text().then(function (value) {
+                    var endingOfQoute = value.indexOf('"', 10);
+                    var endingOfAuthor = value.indexOf('"', endingOfQoute + 12);
+
+                    _this.setState({
+                        quote: value.substring(10, endingOfQoute),
+                        author: value.substring(endingOfQoute + 12, endingOfAuthor),
+                        loading: false
+                    });
+                    console.log(_this.state.loading);
+                });
+            }).catch(function (err) {
+                _this.setState({
+                    error: err
+                });
+            });
+        };
+
+        _this.state = {
+            quote: "",
+            author: "",
+            error: "",
+            loading: true
+        };
+        return _this;
     }
 
     _createClass(App, [{
-        key: 'render',
-        value: function render() {
-            // fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then( resp => {
-            //     resp.text().then(value => {
-            //         console.log(value);
-            //     });
-            // }).catch(err => {
-            //     consol.log(err);
-            // });
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
 
-            fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en', {
-                mode: 'no-cros'
-            }).then(function (resp) {
+            fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then(function (resp) {
                 resp.text().then(function (value) {
-                    console.log(value);
+                    var endingOfQoute = value.indexOf('"', 10);
+                    var endingOfAuthor = value.indexOf('"', endingOfQoute + 12);
+
+                    _this2.setState({
+                        quote: value.substring(10, endingOfQoute),
+                        author: value.substring(endingOfQoute + 12, endingOfAuthor),
+                        loading: false
+                    });
+                    console.log(_this2.state.loading);
                 });
             }).catch(function (err) {
-                consol.log(err);
+                _this2.setState({
+                    error: err
+                });
             });
-
-            //   fetch('').then(resp => {
-            //   if(resp.ok) {
-            //     return resp.json();
-            //   } else {
-            //     console.log('Błąd');
-            //   }
-            // }).catch(error => {
-            //   console.log('Problem');
-            // });
-
+        }
+    }, {
+        key: 'render',
+        value: function render() {
             return _react2.default.createElement(
-                'h1',
-                null,
-                ' test '
+                'div',
+                { className: 'app' },
+                _react2.default.createElement(
+                    'h1',
+                    { className: 'header blockMouse' },
+                    ' Quotes Generator '
+                ),
+                _react2.default.createElement(
+                    'h2',
+                    { className: 'quote' },
+                    ' Qoutes: ',
+                    this.state.quote,
+                    ' '
+                ),
+                _react2.default.createElement(
+                    'h3',
+                    { className: 'author' },
+                    ' Author: ',
+                    this.state.author,
+                    ' '
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'button blockMouse', onClick: this.clickButton },
+                    ' Generate '
+                )
             );
         }
     }]);
@@ -22491,7 +22537,7 @@ exports = module.exports = __webpack_require__(186)(undefined);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "body {\n  font-family: 'Oswald', sans-serif;\n  background-color: #D8D3D3;\n  display: flex;\n  justify-content: center; }\n  body .app {\n    width: 800px;\n    height: 250px;\n    background-color: grey;\n    display: flex;\n    flex-direction: column; }\n    body .app .header {\n      flex-grow: 1;\n      margin: 0;\n      align-self: center; }\n    body .app .quote {\n      flex-grow: 2;\n      margin-left: 5px;\n      margin-right: 5px; }\n    body .app .author {\n      flex-grow: 1;\n      margin-left: 5px; }\n    body .app .button {\n      flex-grow: 1;\n      margin: 0;\n      align-self: center; }\n\n.blockMouse {\n  user-select: none;\n  cursor: default; }\n", ""]);
 
 // exports
 

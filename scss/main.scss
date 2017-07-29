@@ -1,0 +1,45 @@
+body {
+    font-family: 'Oswald', sans-serif;
+
+    background-color: #D8D3D3;
+
+    display: flex;
+    justify-content: center;
+
+    .app{
+        width: 800px;
+        height: 250px;
+        background-color: grey;
+        display: flex;
+        flex-direction: column;
+
+        .header {
+            flex-grow: 1;
+            margin: 0;
+            align-self: center;
+        }
+
+        .quote {
+            flex-grow: 2;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .author {
+            flex-grow: 1;
+            margin-left: 5px;
+        }
+
+        .button {
+            flex-grow: 1;
+            margin: 0;
+            align-self: center;
+        }
+    }
+}
+
+.blockMouse {
+    //pointer-events: none;
+    user-select: none;
+    cursor: default;
+}
