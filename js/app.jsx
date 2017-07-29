@@ -14,8 +14,6 @@ class App extends React.Component {
             consol.log(err);
         });
 
-            let myRequest = "http://api.forismatic.com/"
-
     //   fetch('').then(resp => {
     //   if(resp.ok) {
     //     return resp.json();
