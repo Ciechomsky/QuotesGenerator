@@ -10,8 +10,7 @@ class App extends React.Component {
         this.state = {
             quote: "",
             author: "",
-            error: "",
-            loading: true
+            error: ""
         }
     }
 
@@ -23,10 +22,8 @@ class App extends React.Component {
 
                 this.setState({
                     quote: value.substring(10, endingOfQoute),
-                    author: value.substring(endingOfQoute + 12, endingOfAuthor),
-                    loading: false
-                });  
-                console.log(this.state.loading)          
+                    author: value.substring(endingOfQoute + 12, endingOfAuthor)
+                });          
             });
         }).catch(err => {
             this.setState({
@@ -43,10 +40,8 @@ class App extends React.Component {
 
                 this.setState({
                     quote: value.substring(10, endingOfQoute),
-                    author: value.substring(endingOfQoute + 12, endingOfAuthor),
-                    loading: false
-                });  
-                console.log(this.state.loading)          
+                    author: value.substring(endingOfQoute + 12, endingOfAuthor)
+                });        
             });
         }).catch(err => {
             this.setState({
