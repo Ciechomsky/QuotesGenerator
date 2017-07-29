@@ -9772,8 +9772,20 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
-            fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en').then(function (resp) {
-                console.log(resp);
+            // fetch('https://random-quote-generator.herokuapp.com/api/quotes/random').then( resp => {
+            //     resp.text().then(value => {
+            //         console.log(value);
+            //     });
+            // }).catch(err => {
+            //     consol.log(err);
+            // });
+
+            fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en', {
+                mode: 'no-cros'
+            }).then(function (resp) {
+                resp.text().then(function (value) {
+                    console.log(value);
+                });
             }).catch(function (err) {
                 consol.log(err);
             });
