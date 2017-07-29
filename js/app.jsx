@@ -8,7 +8,7 @@ class App extends React.Component {
 
 
     render () {
-        fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=eny').then( resp => {
+        fetch('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en').then( resp => {
             console.log(resp);
         }).catch(err => {
             consol.log(err);
